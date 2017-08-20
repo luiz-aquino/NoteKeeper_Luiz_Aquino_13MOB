@@ -17,15 +17,15 @@ public class UserDAO {
     public UserDAO(Context context){
         this.context = context;
         UserDataDb userDb = new UserDataDb(context);
-        this.db = userDb.getWritableDatabase();
-        this.insertStmt = this.db.compileStatement(INSERT);
+        db = userDb.getWritableDatabase();
+        insertStmt = this.db.compileStatement(INSERT);
     }
 
     public long Insert(Login login) {
-        this.insertStmt.bindString(1, login.getLogin());
-        this.insertStmt.bindString(2, login.getAcessToken());
-        this.insertStmt.bindString(3, login.getSocialAccessToken());
-        this.insertStmt.bindLong(4, login.getSocialType());
+        insertStmt.bindString(1, login.getLogin());
+        insertStmt.bindString(2, login.getAcessToken());
+        insertStmt.bindString(3, login.getSocialAccessToken());
+        insertStmt.bindLong(4, login.getSocialType());
 
         return this.insertStmt.executeInsert();
     }

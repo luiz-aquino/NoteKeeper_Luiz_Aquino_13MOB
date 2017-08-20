@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class UserDataDb extends SQLiteOpenHelper {
 
     private static final String DBNAME = "noteKeeper.db";
-    private static final int DBVERSION = 1;
+    private static final int DBVERSION = 2;
     public UserDataDb(Context context){
         super(context, DBNAME, null, DBVERSION);
     }
@@ -15,13 +15,15 @@ public class UserDataDb extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String sqlDbUsers = "CREATE TABLE USERS ( LOGIN TEXT PRIMARY KEY, ACCESS_TOKEN TEXT, SOCIAL_TOKEN TEXT, SOCIAL_TYPE INTEGER)";
-        final String sqlDbNotes = "";
+        final String sqlDbNotes = "CREATE TABLE NOTES ( ID INTEGER AUTOINCREMENT PRIMARY KEY, NOTE TEXT, GROUPS TEXT, DATE TEXT, SENT INTEGER )";
         db.execSQL(sqlDbUsers);
+        db.execSQL(sqlDbNotes);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS USERS");
+        db.execSQL("DROP TABLE IF EXISTS NOTES");
         onCreate(db);
     }
 }
