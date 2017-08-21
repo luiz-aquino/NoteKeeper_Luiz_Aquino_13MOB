@@ -14,11 +14,11 @@ import com.example.luiza.notekeeper.Models.Note;
 
 public class NoteDAO {
     private static final String TABLE_NAME = "NOTES";
-    private static final String[] TABLE_FIELDS = new String[] { "ID", "NOTE", "GROUPS", "DATE", "SENT" };
+    private static final String[] TABLE_FIELDS = new String[] { "ID", "NOTE", "GROUPS", "DATE", "SENT", "SCHEDULED", "SCHEDULED_DATE" };
     private Context context;
     private SQLiteDatabase db;
     private SQLiteStatement insertStmt;
-    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (NOTE,GROUPS,DATE,SENT)";
+    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (NOTE,GROUPS,DATE,SENT) VALUES (?,?,?,?)";
     private SimpleDateFormat dateFormater;
 
     public NoteDAO(Context context){
@@ -34,6 +34,10 @@ public class NoteDAO {
         insertStmt.bindString(2, note.getGroups());
         insertStmt.bindString(3, dateFormater.format(note.getCreateDate()));
         insertStmt.bindLong(4, note.isSent() ? 1 : 0);
+        insertStmt.bindLong(5, note.isScheduled() ? 1 : 0);
+        insertStmt.bindString(6, dateFormater.format(note.getScheduledDate()));
+
+        note.setScheduledDate(null);
 
         return insertStmt.executeInsert();
     }
@@ -64,7 +68,7 @@ public class NoteDAO {
     private List<Note> mapCursorToList(Cursor c){
         List<Note> notes = new ArrayList<Note>();
 
-        if(c.moveToFirst()){
+        if(c.getCount() > 0 && c.moveToFirst()){
             do {
                 notes.add(mapCursorToNote(c));
             }while (c.moveToNext());
@@ -85,7 +89,12 @@ public class NoteDAO {
             e.printStackTrace();
         }
         note.setSent(c.getLong(4) == 1);
-
+        note.setScheduled(c.getLong(5) == 1);
+        try {
+            note.setScheduledDate(dateFormater.parse(c.getString(6)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return note;
     }
 }

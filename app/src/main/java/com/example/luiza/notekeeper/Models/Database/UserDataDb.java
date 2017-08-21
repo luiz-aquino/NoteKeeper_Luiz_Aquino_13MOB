@@ -15,7 +15,7 @@ public class UserDataDb extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String sqlDbUsers = "CREATE TABLE USERS ( LOGIN TEXT PRIMARY KEY, ACCESS_TOKEN TEXT, SOCIAL_TOKEN TEXT, SOCIAL_TYPE INTEGER)";
-        final String sqlDbNotes = "CREATE TABLE NOTES ( ID INTEGER AUTOINCREMENT PRIMARY KEY, NOTE TEXT, GROUPS TEXT, DATE TEXT, SENT INTEGER )";
+        final String sqlDbNotes = "CREATE TABLE NOTES ( ID INTEGER PRIMARY KEY, NOTE TEXT, GROUPS TEXT, DATE TEXT, SENT INTEGER, SCHEDULED INT, SCHEDULED_DATE TEXT )";
         db.execSQL(sqlDbUsers);
         db.execSQL(sqlDbNotes);
     }

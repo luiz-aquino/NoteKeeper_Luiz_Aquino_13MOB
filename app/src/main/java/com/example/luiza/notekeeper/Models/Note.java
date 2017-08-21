@@ -12,6 +12,8 @@ public class Note {
     private String Groups;
     private Date CreateDate;
     private boolean Sent;
+    private boolean Scheduled;
+    private Date ScheduledDate;
 
     public long getId() {
         return Id;
@@ -51,6 +53,22 @@ public class Note {
 
     public void setSent(boolean sent) {
         Sent = sent;
+    }
+
+    public boolean isScheduled() {
+        return Scheduled;
+    }
+
+    public void setScheduled(boolean scheduled) {
+        Scheduled = scheduled;
+    }
+
+    public Date getScheduledDate() {
+        return ScheduledDate;
+    }
+
+    public void setScheduledDate(Date scheduledDate) {
+        ScheduledDate = scheduledDate;
     }
 }
 

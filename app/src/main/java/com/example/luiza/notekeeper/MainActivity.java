@@ -12,9 +12,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import com.example.luiza.notekeeper.Models.Database.NoteDAO;
+import com.example.luiza.notekeeper.Models.Note;
+import com.example.luiza.notekeeper.Models.Services.NoteAdaptor;
+
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    ListView lvNotes;
+    private List<Note> notes;
+    private NoteDAO noteDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +42,8 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });*/
+        noteDao = new NoteDAO(this);
+        lvNotes = (ListView) findViewById(R.id.lvNotes);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,6 +53,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        this.loadNotes();
     }
 
     @Override
@@ -98,4 +113,20 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void loadNotes(){
+        List<Note> notes = noteDao.getAllNotes();
+
+        if(notes.size() > 0){
+            lvNotes.setAdapter(new NoteAdaptor(this, notes));
+            lvNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                }
+            });
+        }
+
+    }
+
 }
