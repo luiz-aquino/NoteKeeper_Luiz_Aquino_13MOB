@@ -5,4 +5,16 @@
     <string name="navigation_drawer_close">Close menu</string>
 
     <string name="action_settings">Settings</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_remember_me">Remember me</string>
+    <string name="login_signin">Sign in</string>
+    <string name="login_signup">Sign up</string>
+    <string name="login_username_error">The username field is required!</string>
+    <string name="login_password_error">The password is required!</string>
+    <string name="login_invalid_signin">Invalid username or password!</string>
+    <string name="login_duplicate_user">A user with this username already exists on the database!</string>
+    <string name="login_create_success">User created successfuly!</string>
+    <string name="login_create_error_generic">Error saving login on the database!</string>
+    <string name="login_successfull">Logged successfully!</string>
 </resources>

@@ -12,7 +12,7 @@ public class UserDAO {
     private Context context;
     private SQLiteDatabase db;
     private SQLiteStatement insertStmt;
-    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (LOGIN, ACCESS_TOKEN, SOCIAL_TOKEN, SOCIAL_TYPE) VALUES (?,?,?,?)";
+    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (LOGIN, PASSWORD, ACCESS_TOKEN, SOCIAL_TOKEN, SOCIAL_TYPE) VALUES (?, ?,?,?,?)";
 
     public UserDAO(Context context){
         this.context = context;
@@ -21,21 +21,33 @@ public class UserDAO {
         insertStmt = this.db.compileStatement(INSERT);
     }
 
-    public long Insert(Login login) {
+    public long insert(Login login) {
         insertStmt.bindString(1, login.getLogin());
-        insertStmt.bindString(2, login.getAcessToken());
-        insertStmt.bindString(3, login.getSocialAccessToken());
-        insertStmt.bindLong(4, login.getSocialType());
+        insertStmt.bindString(2, login.getPassword());
+
+        if(login.getAcessToken() != null) {
+            insertStmt.bindString(3, login.getAcessToken());
+        }
+        else {
+            insertStmt.bindNull(3);
+        }
+        if(login.getSocialAccessToken() != null) {
+            insertStmt.bindString(4, login.getSocialAccessToken());
+        }
+        else {
+            insertStmt.bindNull(4);
+        }
+        insertStmt.bindLong(5, login.getSocialType());
 
         return this.insertStmt.executeInsert();
     }
 
-    private void deleteAll() {
+    public void deleteAll() {
         this.db.delete(TABLE_NAME, null, null);
     }
 
-    private Login GetLogin(String login){
-        Cursor c = db.query(TABLE_NAME, new String[] { "LOGIN", "ACCESS_TOKEN", "SOCIAL_TOKEN", "SOCIAL_TYPE" }, "LOGIN = ?", new String[]{ login }, null, null, null);
+    public Login getLogin(String login){
+        Cursor c = db.query(TABLE_NAME, new String[] { "LOGIN", "PASSWORD","ACCESS_TOKEN", "SOCIAL_TOKEN", "SOCIAL_TYPE" }, "LOGIN = ?", new String[]{ login }, null, null, null);
 
         Login l = null;
 
@@ -43,11 +55,22 @@ public class UserDAO {
             c.moveToFirst();
             l = new Login();
             l.setLogin(c.getString(0));
-            l.setAcessToken(c.getString(1));
-            l.setSocialAccessToken(c.getString(2));
-            l.setSocialType(c.getLong(3));
+            l.setPassword(c.getString(1));
+            l.setAcessToken(c.getString(2));
+            l.setSocialAccessToken(c.getString(3));
+            l.setSocialType(c.getLong(4));
         }
 
         return l;
+    }
+
+    public boolean validateLogin(String login, String password){
+        Login l = getLogin(login);
+
+        if(l == null || (l.getSocialAccessToken() != null && !l.getSocialAccessToken().isEmpty())){
+            return false;
+        }
+
+        return l.getPassword().equals(password);
     }
 }
