@@ -2,6 +2,16 @@ package com.example.luiza.notekeeper.Models;
 
 
 public class Login {
+
+    public Login() {
+
+    }
+
+    public Login(String login, String password){
+        this.Login = login;
+        this.Password = password;
+    }
+
     private String Login;
     private String Password;
     private String AcessToken;

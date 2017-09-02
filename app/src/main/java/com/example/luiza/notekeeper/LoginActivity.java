@@ -10,13 +10,15 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.luiza.notekeeper.Models.Database.ConfigDao;
 import com.example.luiza.notekeeper.Models.Database.UserDAO;
 import com.example.luiza.notekeeper.Models.Login;
+import com.example.luiza.notekeeper.Models.NoteConfig;
 
 public class LoginActivity extends AppCompatActivity {
 
     private UserDAO userDAO;
-    private SharedPreferences preferences;
+    private ConfigDao configDao;
     private EditText etUserName;
     private EditText etPassword;
     private CheckBox ckbRemember;
@@ -26,14 +28,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         etUserName = (EditText) findViewById(R.id.login_username);
         etPassword = (EditText) findViewById(R.id.login_password);
         ckbRemember = (CheckBox) findViewById(R.id.login_rememberme);
 
         userDAO = new UserDAO(this);
-        String teste = preferences.getString("USERNAME", "");
+        configDao = new ConfigDao(this);
      }
 
     public Login getLogin() {
@@ -50,10 +51,7 @@ public class LoginActivity extends AppCompatActivity {
             return null;
         }
 
-        Login l = new Login();
-        l.setLogin(username);
-        l.setPassword(password);
-
+        Login l = new Login(username, password);
         return l;
     }
 
@@ -63,10 +61,9 @@ public class LoginActivity extends AppCompatActivity {
         if(l == null) return;
 
         if(userDAO.validateLogin(l.getLogin(), l.getPassword())){
-            SharedPreferences.Editor e = preferences.edit();
-            e.putString("USERNAME", l.getLogin());
-            e.putBoolean("REMEMBER", ckbRemember.isChecked());
+            NoteConfig config = new NoteConfig("LOGGEDUSER", l.getLogin(), l.getLogin(), ckbRemember.isChecked());
 
+            configDao.insert(config);
             Toast.makeText(this, getString(R.string.login_successfull), Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);

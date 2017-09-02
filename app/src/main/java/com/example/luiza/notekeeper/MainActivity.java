@@ -1,5 +1,6 @@
 package com.example.luiza.notekeeper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,8 +16,10 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.luiza.notekeeper.Models.Database.ConfigDao;
 import com.example.luiza.notekeeper.Models.Database.NoteDAO;
 import com.example.luiza.notekeeper.Models.Note;
+import com.example.luiza.notekeeper.Models.NoteConfig;
 import com.example.luiza.notekeeper.Models.Services.NoteAdaptor;
 
 import java.util.List;
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ListView lvNotes;
     private List<Note> notes;
     private NoteDAO noteDao;
+    private ConfigDao configDao;
+    private String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .setAction("Action", null).show();
             }
         });*/
+
         noteDao = new NoteDAO(this);
+        configDao = new ConfigDao(this);
         lvNotes = (ListView) findViewById(R.id.lvNotes);
+
+        NoteConfig c = configDao.get("LOGGEDUSER");
+        currentUser = c.getUserName();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -82,7 +92,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logoff) {
+            Intent i = new Intent(this, LoginActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(i);
+            finish();
             return true;
         }
 
@@ -127,6 +141,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
+    }
+
+    public void logoff(View view){
+        configDao.delete("LOGGEDUSER");
+        finish();
     }
 
 }

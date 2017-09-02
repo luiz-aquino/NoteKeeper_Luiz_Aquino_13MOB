@@ -17,4 +17,5 @@
     <string name="login_create_success">User created successfuly!</string>
     <string name="login_create_error_generic">Error saving login on the database!</string>
     <string name="login_successfull">Logged successfully!</string>
+    <string name="action_logoff">Logoff</string>
 </resources>

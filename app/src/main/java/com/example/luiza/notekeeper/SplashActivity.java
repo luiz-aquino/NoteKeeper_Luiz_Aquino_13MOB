@@ -11,12 +11,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.luiza.notekeeper.Models.Database.ConfigDao;
 import com.example.luiza.notekeeper.Models.Login;
+import com.example.luiza.notekeeper.Models.NoteConfig;
 
 public class SplashActivity extends AppCompatActivity {
 
     private final int SPLASH_DISPLAY_LENGTH = 4500;
-    private SharedPreferences preferences;
+    private ConfigDao configDao;
     private boolean logedIn;
 
     @Override
@@ -24,21 +26,20 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         logedIn = false;
 
+        configDao = new ConfigDao(this);
         readPerferences();
         playSound();
         load();
     }
 
     private void readPerferences(){
-        String username = preferences.getString("USERNAME", "");
-        boolean rememberMe = preferences.getBoolean("REMEMBER", false);
-        if(!username.isEmpty()){
-            if(!rememberMe) {
-                SharedPreferences.Editor e = preferences.edit();
-                e.putString("USERNAME", "");
+        NoteConfig config = configDao.get("LOGGEDUSER");
+
+        if(config != null){
+            if(!config.isRemember()) {
+                configDao.delete("LOGGEDUSER");
             }
             else {
                 logedIn = true;
