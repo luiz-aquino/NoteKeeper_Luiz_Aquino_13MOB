@@ -11,14 +11,21 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.luiza.notekeeper.Models.ApiUser;
 import com.example.luiza.notekeeper.Models.Database.ConfigDao;
 import com.example.luiza.notekeeper.Models.Login;
 import com.example.luiza.notekeeper.Models.NoteConfig;
+import com.example.luiza.notekeeper.api.ApiUtils;
+import com.example.luiza.notekeeper.api.IUserBaseAPI;
+
+import java.util.List;
+import java.util.Observer;
 
 public class SplashActivity extends AppCompatActivity {
 
     private final int SPLASH_DISPLAY_LENGTH = 4500;
     private ConfigDao configDao;
+    private IUserBaseAPI userApi;
     private boolean logedIn;
 
     @Override
@@ -28,10 +35,15 @@ public class SplashActivity extends AppCompatActivity {
 
         logedIn = false;
 
+        userApi = ApiUtils.getUserApi();
         configDao = new ConfigDao(this);
         readPerferences();
         playSound();
         load();
+    }
+
+    private void loadUsers() {
+        userApi.GetAll().registerObserver();
     }
 
     private void readPerferences(){
