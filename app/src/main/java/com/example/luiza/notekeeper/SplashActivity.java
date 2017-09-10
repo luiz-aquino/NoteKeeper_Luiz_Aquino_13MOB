@@ -18,7 +18,9 @@ import com.example.luiza.notekeeper.Models.NoteConfig;
 import com.example.luiza.notekeeper.api.ApiUtils;
 import com.example.luiza.notekeeper.api.IUserBaseAPI;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Observer;
 
 public class SplashActivity extends AppCompatActivity {
@@ -43,7 +45,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void loadUsers() {
-        userApi.GetAll().registerObserver();
+        ArrayList<ApiUser> users = new ArrayList<>();
+        userApi.GetAll().registerObserver(users);
+        users
     }
 
     private void readPerferences(){

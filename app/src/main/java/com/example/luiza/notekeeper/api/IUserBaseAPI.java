@@ -4,7 +4,9 @@ import android.database.Observable;
 
 import com.example.luiza.notekeeper.Models.ApiUser;
 
+
 import java.util.List;
+import java.util.Observer;
 
 import retrofit2.http.GET;
 
