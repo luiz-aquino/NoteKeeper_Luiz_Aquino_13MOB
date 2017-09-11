@@ -59,9 +59,8 @@ public class ConfigDao {
     }
 
     public long delete(String key) {
-        deleteStmt.bindString(0, key);
 
-        return  deleteStmt.executeUpdateDelete();
+        return  db.delete("CONFIGS", "KEY = ?", new String[] { key });
     }
 
     public long update(NoteConfig config){

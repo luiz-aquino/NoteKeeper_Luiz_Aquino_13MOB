@@ -18,4 +18,8 @@
     <string name="login_create_error_generic">Error saving login on the database!</string>
     <string name="login_successfull">Logged successfully!</string>
     <string name="action_logoff">Logoff</string>
+    <string name="loading_users_error_title">Error</string>
+    <string name="loading_users_error_message">Unnable to load users from de api</string>
+    <string name="facebook_app_id">115887532434856</string>
+    <string name="fb_login_protocol_scheme">fb115887532434856</string>
 </resources>

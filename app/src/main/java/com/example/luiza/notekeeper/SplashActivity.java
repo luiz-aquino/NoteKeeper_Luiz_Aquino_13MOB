@@ -7,12 +7,14 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.luiza.notekeeper.Models.ApiUser;
 import com.example.luiza.notekeeper.Models.Database.ConfigDao;
+import com.example.luiza.notekeeper.Models.Database.UserDAO;
 import com.example.luiza.notekeeper.Models.Login;
 import com.example.luiza.notekeeper.Models.NoteConfig;
 import com.example.luiza.notekeeper.api.ApiUtils;
@@ -23,10 +25,15 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class SplashActivity extends AppCompatActivity {
 
     private final int SPLASH_DISPLAY_LENGTH = 4500;
     private ConfigDao configDao;
+    private UserDAO userDao;
     private IUserBaseAPI userApi;
     private boolean logedIn;
 
@@ -39,15 +46,35 @@ public class SplashActivity extends AppCompatActivity {
 
         userApi = ApiUtils.getUserApi();
         configDao = new ConfigDao(this);
+        userDao = new UserDAO(this);
         readPerferences();
+        loadUsers();
         playSound();
         load();
     }
 
     private void loadUsers() {
-        ArrayList<ApiUser> users = new ArrayList<>();
-        userApi.GetAll().registerObserver(users);
-        users
+        userApi.GetUser().enqueue(new Callback<ApiUser>() {
+            @Override
+            public void onResponse(Call<ApiUser> call, Response<ApiUser> response) {
+                if(response.isSuccessful()){
+                    ApiUser user = response.body();
+                    if(userDao.getLogin(user.getUser()) != null){
+                        return;
+                    }
+
+                    Login l = new Login();
+                    l.setLogin(user.getUser());
+                    l.setPassword(user.getPassword());
+                    userDao.insert(l);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiUser> call, Throwable t) {
+                Log.e(getString(R.string.loading_users_error_title), getString(R.string.loading_users_error_message) + "\n" + t.getMessage());
+            }
+        });
     }
 
     private void readPerferences(){

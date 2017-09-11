@@ -8,6 +8,7 @@ import com.example.luiza.notekeeper.Models.ApiUser;
 import java.util.List;
 import java.util.Observer;
 
+import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
@@ -15,6 +16,6 @@ import retrofit2.http.GET;
  */
 
 public interface IUserBaseAPI {
-    @GET("/")
-    Observable<List<ApiUser>> GetAll();
+    @GET("/v2/58b9b1740f0000b614f09d2f/")
+    Call<ApiUser> GetUser();
 }

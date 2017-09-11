@@ -10,7 +10,7 @@ import retrofit2.Retrofit;
  */
 
 public class ApiUtils {
-    public static final String BASE_URL = "http://www.mocky.io/v2/58b9b1740f0000b614f09d2f/";
+    public static final String BASE_URL = "http://www.mocky.io/";
     private static URL URL_BASE;
 
 
