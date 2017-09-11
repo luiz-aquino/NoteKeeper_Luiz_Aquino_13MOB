@@ -22,4 +22,9 @@
     <string name="loading_users_error_message">Unnable to load users from de api</string>
     <string name="facebook_app_id">115887532434856</string>
     <string name="fb_login_protocol_scheme">fb115887532434856</string>
+    <string name="facebook_login_failed">Facebook login failed</string>
+    <string name="fabook_login_error_system_title">Error login facebook</string>
+    <string name="facebook_login_error_system_msg">The system was unnable to loggin with facebook</string>
+    <string name="login_facebook_canceled">Login canceled by the user!</string>
+    <string name="facebook_login_success">Facebook login was successful</string>
 </resources>

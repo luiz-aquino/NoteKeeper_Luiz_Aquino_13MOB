@@ -15,12 +15,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.luiza.notekeeper.Models.Database.ConfigDao;
 import com.example.luiza.notekeeper.Models.Database.NoteDAO;
 import com.example.luiza.notekeeper.Models.Note;
 import com.example.luiza.notekeeper.Models.NoteConfig;
 import com.example.luiza.notekeeper.Models.Services.NoteAdaptor;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 
 import java.util.List;
 
@@ -93,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logoff) {
+            configDao.delete("LOGGEDUSER");
+            Toast.makeText(MainActivity.this, "Logged off successfuly", Toast.LENGTH_LONG).show();
+            LoginManager.getInstance().logOut();
             Intent i = new Intent(this, LoginActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(i);
@@ -142,10 +148,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
-
-    public void logoff(View view){
-        configDao.delete("LOGGEDUSER");
-        finish();
-    }
-
 }

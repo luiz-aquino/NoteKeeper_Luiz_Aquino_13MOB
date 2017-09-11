@@ -19,6 +19,7 @@ import com.example.luiza.notekeeper.Models.Login;
 import com.example.luiza.notekeeper.Models.NoteConfig;
 import com.example.luiza.notekeeper.api.ApiUtils;
 import com.example.luiza.notekeeper.api.IUserBaseAPI;
+import com.facebook.AccessToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,12 @@ public class SplashActivity extends AppCompatActivity {
 
         if(config != null){
             if(!config.isRemember()) {
-                configDao.delete("LOGGEDUSER");
+                if(AccessToken.getCurrentAccessToken() != null) {
+                    logedIn = true;
+                }
+                else {
+                    configDao.delete("LOGGEDUSER");
+                }
             }
             else {
                 logedIn = true;

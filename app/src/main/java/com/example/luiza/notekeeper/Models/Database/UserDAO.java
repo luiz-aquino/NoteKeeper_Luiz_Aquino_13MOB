@@ -23,7 +23,13 @@ public class UserDAO {
 
     public long insert(Login login) {
         insertStmt.bindString(1, login.getLogin());
-        insertStmt.bindString(2, login.getPassword());
+        if(login.getPassword() == null)
+        {
+            insertStmt.bindNull(2);
+        }
+        else {
+            insertStmt.bindString(2, login.getPassword());
+        }
 
         if(login.getAcessToken() != null) {
             insertStmt.bindString(3, login.getAcessToken());
