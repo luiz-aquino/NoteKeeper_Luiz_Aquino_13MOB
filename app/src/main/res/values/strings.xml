@@ -27,4 +27,9 @@
     <string name="facebook_login_error_system_msg">The system was unnable to loggin with facebook</string>
     <string name="login_facebook_canceled">Login canceled by the user!</string>
     <string name="facebook_login_success">Facebook login was successful</string>
+    <string name="create_note_label">Note</string>
+    <string name="btn_cancel_create_note">Cancel</string>
+    <string name="btn_create_note">Save</string>
+    <string name="create_note_empt_text_error">The note text is required!</string>
+    <string name="app_version_text">App version:</string>
 </resources>

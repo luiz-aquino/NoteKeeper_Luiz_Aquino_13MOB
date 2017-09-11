@@ -18,7 +18,7 @@ public class NoteDAO {
     private Context context;
     private SQLiteDatabase db;
     private SQLiteStatement insertStmt;
-    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (NOTE,GROUPS,DATE,SENT) VALUES (?,?,?,?)";
+    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (NOTE,GROUPS,DATE,SENT, SCHEDULED, SCHEDULED_DATE) VALUES (?,?,?,?,?,?)";
     private SimpleDateFormat dateFormater;
 
     public NoteDAO(Context context){
@@ -96,5 +96,33 @@ public class NoteDAO {
             e.printStackTrace();
         }
         return note;
+    }
+
+    public long insert(Note note) {
+        insertStmt.bindString(0, note.getNote());
+
+        if(note.getGroups().isEmpty()){
+            insertStmt.bindNull(1);
+        }
+        else {
+            insertStmt.bindString(1, note.getGroups());
+        }
+
+        insertStmt.bindString(2, dateFormater.format(note.getCreateDate()));
+        insertStmt.bindDouble(3, note.isSent() ? 1 : 0);
+        insertStmt.bindDouble(4, note.isScheduled() ? 1 : 0);
+
+        if(note.getScheduledDate() == null) {
+            insertStmt.bindNull(5);
+        }
+        else {
+            insertStmt.bindString(5, dateFormater.format(note.getScheduledDate()));
+        }
+
+        return insertStmt.executeInsert();
+    }
+
+    public long delete(long id) {
+        return  db.delete("CONFIGS", "KEY = ?", new String[] { String.valueOf(id) });
     }
 }
