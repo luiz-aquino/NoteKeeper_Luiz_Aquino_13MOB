@@ -32,4 +32,5 @@
     <string name="btn_create_note">Save</string>
     <string name="create_note_empt_text_error">The note text is required!</string>
     <string name="app_version_text">App version:</string>
+    <string name="title_activity_where_am_i">Map</string>
 </resources>

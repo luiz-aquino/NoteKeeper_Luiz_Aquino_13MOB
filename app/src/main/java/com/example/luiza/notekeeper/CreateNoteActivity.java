@@ -40,7 +40,6 @@ public class CreateNoteActivity extends AppCompatActivity {
         note.setNote(noteText);
         note.setCreateDate(Calendar.getInstance().getTime());
 
-
-        noteDao.deleteAll();
+        noteDao.insert(note);
     }
 }
