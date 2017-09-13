@@ -114,28 +114,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent i = null;
 
         if (id == R.id.createNote) {
-            Intent i = new Intent(MainActivity.this, CreateNoteActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(i);
+            i = new Intent(MainActivity.this, CreateNoteActivity.class);
         } else if (id == R.id.about) {
-            Intent i = new Intent(MainActivity.this, SobreActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(i);
-        } else
-            /*
-            if (id == R.id.nav_gallery) {
+            i = new Intent(MainActivity.this, SobreActivity.class);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else */
-            if (id == R.id.nav_share) {
-
+        } else if(id == R.id.map) {
+            i = new Intent(MainActivity.this, WhereAmIActivity.class);
         }
 
+        if(i != null) {
+            i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(i);
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

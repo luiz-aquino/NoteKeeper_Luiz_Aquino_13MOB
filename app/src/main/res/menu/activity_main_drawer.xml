@@ -9,7 +9,12 @@
         <item
             android:id="@+id/about"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="About this app" />
+
+        <item
+            android:id="@+id/map"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Where are you" />
         <!--
 
         <item
