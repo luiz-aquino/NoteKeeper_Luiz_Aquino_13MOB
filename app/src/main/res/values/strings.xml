@@ -33,4 +33,8 @@
     <string name="create_note_empt_text_error">The note text is required!</string>
     <string name="app_version_text">App version:</string>
     <string name="title_activity_where_am_i">Map</string>
+    <string name="delete_note_success_rc">Note successfuly deleted!</string>
+    <string name="delete_note_error_rc">Error deleting note!</string>
+    <string name="note_success_updating">Note successfuly updateted!</string>
+    <string name="note_error_updating">Error while updating the note.</string>
 </resources>

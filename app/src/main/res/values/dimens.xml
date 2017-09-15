@@ -8,4 +8,6 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="default_padding">16dp</dimen>
+    <dimen name="font_large">19sp</dimen>
+    <dimen name="cardview_default_margin">7dp</dimen>
 </resources>

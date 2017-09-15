@@ -12,22 +12,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/checklist"
-        android:maxHeight="300dp"
-        android:adjustViewBounds="true"/>
+        android:maxHeight="200dp"
+        android:adjustViewBounds="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Luiz Tomas de Aquino"/>
+        android:text="Luiz Tomas de Aquino"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:textSize="@dimen/font_large"
+        />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvAppVersion"/>
+        android:id="@+id/tvAppVersion"
+        tools:text="1.0"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:textSize="@dimen/font_large"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ok"
-        android:onClick="close"/>
+        android:onClick="close"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"/>
 
 </LinearLayout>

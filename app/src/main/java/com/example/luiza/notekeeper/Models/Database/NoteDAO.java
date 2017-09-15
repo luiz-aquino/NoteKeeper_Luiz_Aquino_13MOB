@@ -1,5 +1,6 @@
 package com.example.luiza.notekeeper.Models.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,17 +30,52 @@ public class NoteDAO {
         dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
 
-    public long Insert(Note note){
+    public long insert(Note note){
         insertStmt.bindString(1, note.getNote());
-        insertStmt.bindString(2, note.getGroups());
+        if(note.getGroups() == null || note.getGroups().isEmpty()){
+            insertStmt.bindNull(2);
+        }else {
+            insertStmt.bindString(2, note.getGroups());
+        }
         insertStmt.bindString(3, dateFormater.format(note.getCreateDate()));
         insertStmt.bindLong(4, note.isSent() ? 1 : 0);
         insertStmt.bindLong(5, note.isScheduled() ? 1 : 0);
-        insertStmt.bindString(6, dateFormater.format(note.getScheduledDate()));
+
+        if(note.getScheduledDate() == null) {
+            insertStmt.bindNull(5);
+        }
+        else {
+            insertStmt.bindString(5, dateFormater.format(note.getScheduledDate()));
+        }
 
         note.setScheduledDate(null);
 
         return insertStmt.executeInsert();
+    }
+
+    public long update(Note note){
+        ContentValues cv = new ContentValues();
+
+        cv.put("NOTE", note.getNote());
+        if(note.getGroups() != null && !note.getGroups().isEmpty()){
+            cv.put("GROUPS", note.getGroups());
+        }
+        else {
+            cv.putNull("GROUPS");
+        }
+
+        cv.put("DATE",dateFormater.format(note.getCreateDate()));
+        cv.put("SENT", note.isSent() ? 1 : 0);
+        cv.put("SCHEDULED", note.isScheduled() ? 1 : 0);
+
+        if(note.getScheduledDate() == null) {
+            cv.putNull("SCHEDULED_DATE");
+        }
+        else {
+            cv.put("SCHEDULED_DATE", dateFormater.format(note.getScheduledDate()));
+        }
+
+        return db.update(TABLE_NAME, cv, "ID = ?", new String[] { String.valueOf(note.getId())});
     }
 
     public void deleteAll() { db.delete(TABLE_NAME, null, null); }
@@ -57,6 +93,11 @@ public class NoteDAO {
 
     public List<Note> getAllNotes() {
         Cursor c = db.query(TABLE_NAME, TABLE_FIELDS, null, null, null, null, "DATE DESC");
+        return mapCursorToList(c);
+    }
+
+    public List<Note> getAllNotes(String username) {
+        Cursor c = db.query(TABLE_NAME, TABLE_FIELDS, "GROUPS = ?", new String[] { username } , null, null, "DATE DESC");
         return mapCursorToList(c);
     }
 
@@ -88,41 +129,23 @@ public class NoteDAO {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         note.setSent(c.getLong(4) == 1);
         note.setScheduled(c.getLong(5) == 1);
-        try {
-            note.setScheduledDate(dateFormater.parse(c.getString(6)));
-        } catch (ParseException e) {
-            e.printStackTrace();
+        String strScheduledDate = c.getString(6);
+        if(strScheduledDate != null && !strScheduledDate.isEmpty()) {
+            try {
+                note.setScheduledDate(dateFormater.parse(c.getString(6)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
+
         return note;
     }
 
-    public long insert(Note note) {
-        insertStmt.bindString(0, note.getNote());
-
-        if(note.getGroups().isEmpty()){
-            insertStmt.bindNull(1);
-        }
-        else {
-            insertStmt.bindString(1, note.getGroups());
-        }
-
-        insertStmt.bindString(2, dateFormater.format(note.getCreateDate()));
-        insertStmt.bindDouble(3, note.isSent() ? 1 : 0);
-        insertStmt.bindDouble(4, note.isScheduled() ? 1 : 0);
-
-        if(note.getScheduledDate() == null) {
-            insertStmt.bindNull(5);
-        }
-        else {
-            insertStmt.bindString(5, dateFormater.format(note.getScheduledDate()));
-        }
-
-        return insertStmt.executeInsert();
-    }
 
     public long delete(long id) {
-        return  db.delete("CONFIGS", "KEY = ?", new String[] { String.valueOf(id) });
+        return  db.delete("NOTES", "ID = ?", new String[] { String.valueOf(id) });
     }
 }

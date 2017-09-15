@@ -59,12 +59,12 @@ public class WhereAmIActivity extends FragmentActivity implements OnMapReadyCall
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(true);
-                //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                //Criteria criteria = new Criteria();
-                //String provider = locationManager.getBestProvider(criteria, false);
-                //Location location = locationManager.getLastKnownLocation(provider);
-                //LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 16));
+                locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+                Criteria criteria = new Criteria();
+                String provider = locationManager.getBestProvider(criteria, true);
+                Location location = locationManager.getLastKnownLocation(provider);
+                LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 16));
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},  MY_LOCATION_REQUEST_CODE);
             }
@@ -77,6 +77,8 @@ public class WhereAmIActivity extends FragmentActivity implements OnMapReadyCall
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

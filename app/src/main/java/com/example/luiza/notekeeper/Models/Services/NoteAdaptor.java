@@ -47,13 +47,13 @@ public class NoteAdaptor extends BaseAdapter {
             convertView = inflater.inflate(R.layout.note_item_layout, parent, false);
         }
 
-        TextView tvData = (TextView) convertView.findViewById(R.id.tvDate);
-        TextView tvInfo = (TextView) convertView.findViewById(R.id.tvInfo);
+        /*TextView tvData = (TextView) convertView.findViewById(R.id.tvDate);
+        TextView tvInfo = (TextView) convertView.findViewById(R.id.tvInfo);*/
 
         Note current = notes.get(position);
 
-        tvData.setText(dateFormat.format(current.getCreateDate()));
-        tvInfo.setText(current.getNote());
+       /* tvData.setText(dateFormat.format(current.getCreateDate()));
+        tvInfo.setText(current.getNote());*/
 
         return convertView;
     }
