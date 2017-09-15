@@ -37,4 +37,7 @@
     <string name="delete_note_error_rc">Error deleting note!</string>
     <string name="note_success_updating">Note successfuly updateted!</string>
     <string name="note_error_updating">Error while updating the note.</string>
+    <string name="share_note">Share</string>
+    <string name="share_note_title">Shared on </string>
+    <string name="share_note_via">Share via</string>
 </resources>

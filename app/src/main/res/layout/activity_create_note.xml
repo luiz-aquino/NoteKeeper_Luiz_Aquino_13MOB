@@ -15,7 +15,8 @@
         android:id="@+id/edtNewNote"
         android:minLines="15"
         android:gravity="top"
-        android:text=""/>
+        android:text=""
+        android:autoLink="all"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,5 +36,14 @@
             android:text="@string/btn_create_note"
             android:id="@+id/btnCreateNote"
             android:onClick="create"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/share_note"
+            android:id="@+id/btn_share_Note"
+            android:onClick="share"
+
+            />
     </LinearLayout>
 </LinearLayout>

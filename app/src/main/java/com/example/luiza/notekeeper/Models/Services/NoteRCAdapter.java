@@ -3,6 +3,7 @@ package com.example.luiza.notekeeper.Models.Services;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +71,8 @@ public class NoteRCAdapter extends RecyclerView.Adapter<NoteRCAdapter.ViewHolder
             cv = (CardView) itemView.findViewById(R.id.cv_note);
             tvDate = (TextView) itemView.findViewById(R.id.tv_date_note);
             tvNoteInfo = (TextView) itemView.findViewById(R.id.tv_note_info);
+
+            Linkify.addLinks(tvNoteInfo, Linkify.ALL);
         }
 
         public void bind(final Note note, final MyOnClickListener listener){

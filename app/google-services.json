@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "748742687359",
+    "firebase_url": "https://mob-notekeeper.firebaseio.com",
+    "project_id": "mob-notekeeper",
+    "storage_bucket": "mob-notekeeper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748742687359:android:807d2d22d9272fd0",
+        "android_client_info": {
+          "package_name": "com.example.luiza.notekeeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748742687359-naos7g2k84vr6viv3kht193vn4shceq0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoFN1JmMGzfgdPnl1m4Hmd0-nbTPN610k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

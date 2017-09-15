@@ -1,5 +1,6 @@
 package com.example.luiza.notekeeper;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.example.luiza.notekeeper.Models.Database.NoteDAO;
 import com.example.luiza.notekeeper.Models.Database.UserDAO;
 import com.example.luiza.notekeeper.Models.Note;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class CreateNoteActivity extends AppCompatActivity {
@@ -18,12 +20,14 @@ public class CreateNoteActivity extends AppCompatActivity {
     private EditText edtNote;
     private Note note;
     private String username;
+    private SimpleDateFormat dateFormater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
         note = null;
+        dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         edtNote = (EditText) findViewById(R.id.edtNewNote);
 
@@ -75,6 +79,14 @@ public class CreateNoteActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void share(View v) {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_note_title) + " " + dateFormater.format(Calendar.getInstance().getTime()));
+        i.putExtra(Intent.EXTRA_TEXT, edtNote.getText().toString());
+        startActivity(Intent.createChooser(i, getString(R.string.share_note_via)));
     }
 
     public void cancel(View view){
