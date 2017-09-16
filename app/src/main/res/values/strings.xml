@@ -41,7 +41,7 @@
     <string name="share_note_title">Shared on </string>
     <string name="share_note_via">Share via</string>
     <string name="menu_logoff_button">Signoff</string>
-    <string name="menu_where_are_you">Where are you</string>
+    <string name="menu_where_are_you">Map</string>
     <string name="menu_about">About this app</string>
     <string name="menu_create_note">Create note</string>
 </resources>

@@ -59,12 +59,20 @@ public class WhereAmIActivity extends FragmentActivity implements OnMapReadyCall
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(true);
-                locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+                /*locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
                 Criteria criteria = new Criteria();
                 String provider = locationManager.getBestProvider(criteria, true);
                 Location location = locationManager.getLastKnownLocation(provider);
-                LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 16));
+                if(location != null) {
+                    LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(loc).title("Here you are"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 16));
+                }
+                else {*/
+                    LatLng loc = new LatLng(-23.5699526, -46.6560509);
+                    mMap.addMarker(new MarkerOptions().position(loc).title("Fiap"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 16));
+                //}
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},  MY_LOCATION_REQUEST_CODE);
             }

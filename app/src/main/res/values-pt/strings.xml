@@ -32,7 +32,7 @@
     <string name="menu_about">Sobre este app</string>
     <string name="menu_create_note">Criar nota</string>
     <string name="menu_logoff_button">Sair</string>
-    <string name="menu_where_are_you">Aonde você esta</string>
+    <string name="menu_where_are_you">Mapa</string>
     <string name="navigation_drawer_close">Fechar menu</string>
     <string name="navigation_drawer_open">Abrir menu</string>
     <string name="note_error_updating">Erro ao atualizar nota</string>
