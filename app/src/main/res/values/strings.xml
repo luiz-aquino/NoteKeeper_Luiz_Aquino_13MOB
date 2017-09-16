@@ -20,8 +20,8 @@
     <string name="action_logoff">Logoff</string>
     <string name="loading_users_error_title">Error</string>
     <string name="loading_users_error_message">Unnable to load users from de api</string>
-    <string name="facebook_app_id">115887532434856</string>
-    <string name="fb_login_protocol_scheme">fb115887532434856</string>
+    <string name="facebook_app_id" translatable="false">115887532434856</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb115887532434856</string>
     <string name="facebook_login_failed">Facebook login failed</string>
     <string name="fabook_login_error_system_title">Error login facebook</string>
     <string name="facebook_login_error_system_msg">The system was unnable to loggin with facebook</string>
@@ -40,4 +40,8 @@
     <string name="share_note">Share</string>
     <string name="share_note_title">Shared on </string>
     <string name="share_note_via">Share via</string>
+    <string name="menu_logoff_button">Signoff</string>
+    <string name="menu_where_are_you">Where are you</string>
+    <string name="menu_about">About this app</string>
+    <string name="menu_create_note">Create note</string>
 </resources>

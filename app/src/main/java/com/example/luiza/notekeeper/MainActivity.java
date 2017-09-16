@@ -151,6 +151,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    private void logoff(){
+        configDao.delete("LOGGEDUSER");
+        Toast.makeText(MainActivity.this, "Logged off successfuly", Toast.LENGTH_LONG).show();
+        LoginManager.getInstance().logOut();
+        Intent i = new Intent(this, LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(i);
+        finish();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -160,13 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logoff) {
-            configDao.delete("LOGGEDUSER");
-            Toast.makeText(MainActivity.this, "Logged off successfuly", Toast.LENGTH_LONG).show();
-            LoginManager.getInstance().logOut();
-            Intent i = new Intent(this, LoginActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(i);
-            finish();
+            logoff();
             return true;
         }
 
@@ -188,6 +192,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if(id == R.id.map) {
             i = new Intent(MainActivity.this, WhereAmIActivity.class);
+        }
+        else if(id == R.id.ic_mn_close){
+            logoff();
+            return true;
         }
 
         if(i != null) {

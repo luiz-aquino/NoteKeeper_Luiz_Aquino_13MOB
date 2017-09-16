@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NoteKeeper</string>
+    <string name="action_logoff">Sair</string>
+    <string name="action_settings">Opções</string>
+    <string name="app_version_text">Versão do app</string>
+    <string name="btn_cancel_create_note">Cancelar</string>
+    <string name="btn_create_note">Salvar</string>
+    <string name="create_note_empt_text_error">O texto da nota é obrigatório</string>
+    <string name="create_note_label">Nota</string>
+    <string name="delete_note_error_rc">Erro ao excluir nota</string>
+    <string name="delete_note_success_rc">Nota excluida com sucesso!</string>
+    <string name="fabook_login_error_system_title">Erro ao realizar login com o facebook</string>
+    <string name="facebook_login_error_system_msg">O sistema não foi capaz de fazer login com o facebook</string>
+    <string name="facebook_login_failed">Login com o facebook falhou</string>
+    <string name="facebook_login_success">Login com facebook foi um sucesso</string>
+    <string name="loading_users_error_message">Não foi possivel carregar os usuarios da api</string>
+    <string name="loading_users_error_title">Erro</string>
+    <string name="login_create_error_generic">Erro salvando login no banco de dados</string>
+    <string name="login_create_success">Usuário criado com sucesso!</string>
+    <string name="login_duplicate_user">Um usuario com este nome ja foi criado</string>
+    <string name="login_facebook_canceled">Login cancelado pelo usuário</string>
+    <string name="login_invalid_signin">Login ou senha inválidos !</string>
+    <string name="login_password">Senha</string>
+    <string name="login_password_error">Senha é um campo obrigatório</string>
+    <string name="login_remember_me">Lembrar-me</string>
+    <string name="login_signin">Logar</string>
+    <string name="login_successfull">Login realizado com sucesso</string>
+    <string name="login_signup">Criar conta</string>
+    <string name="login_username">Usuario</string>
+    <string name="login_username_error">O campo usuário é obrigatório</string>
+    <string name="menu_about">Sobre este app</string>
+    <string name="menu_create_note">Criar nota</string>
+    <string name="menu_logoff_button">Sair</string>
+    <string name="menu_where_are_you">Aonde você esta</string>
+    <string name="navigation_drawer_close">Fechar menu</string>
+    <string name="navigation_drawer_open">Abrir menu</string>
+    <string name="note_error_updating">Erro ao atualizar nota</string>
+    <string name="note_success_updating">Nota atualizada com sucesso</string>
+    <string name="share_note">Compartilhar</string>
+    <string name="share_note_title">Compartilhar por</string>
+    <string name="share_note_via">Comportilhar através</string>
+    <string name="title_activity_where_am_i">Mapa</string>
+</resources>

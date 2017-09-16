@@ -5,16 +5,16 @@
         <item
             android:id="@+id/createNote"
             android:icon="@drawable/ic_action_edit_dark"
-            android:title="Notas" />
+            android:title="@string/menu_create_note" />
         <item
             android:id="@+id/about"
             android:icon="@drawable/ic_action_about"
-            android:title="About this app" />
+            android:title="@string/menu_about" />
 
         <item
             android:id="@+id/map"
             android:icon="@drawable/ic_add_location"
-            android:title="Where are you" />
+            android:title="@string/menu_where_are_you" />
         <!--
 
         <item
@@ -28,13 +28,13 @@
             -->
     </group>
 
-<!--    <item android:title="Communicate">
+    <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/ic_mn_close"
+                android:icon="@drawable/ic_action_logoff_light"
+                android:title="@string/menu_logoff_button" />
         </menu>
-    </item>-->
+    </item>
 
 </menu>
