@@ -37,7 +37,8 @@ public class ConfigDao {
     public long insert(NoteConfig config){
         insertStmt.bindString(1, config.getKey());
         insertStmt.bindString(2, config.getValue());
-        insertStmt.bindDouble(3, config.isRemember() ? 1 : 0);
+        insertStmt.bindString(3, config.getUserName());
+        insertStmt.bindDouble(4, config.isRemember() ? 1 : 0);
 
         return insertStmt.executeInsert();
     }
@@ -52,7 +53,8 @@ public class ConfigDao {
             config = new NoteConfig();
             config.setKey(c.getString(0));
             config.setValue(c.getString(1));
-            config.setRemember(c.getDouble(2) == 1);
+            config.setUserName(c.getString(2));
+            config.setRemember(c.getDouble(3) == 1);
         }
 
         return config;

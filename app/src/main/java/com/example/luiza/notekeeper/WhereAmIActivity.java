@@ -26,7 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class WhereAmIActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
-    private int MY_LOCATION_REQUEST_CODE = 0;
+    public static int MY_LOCATION_REQUEST_CODE = 0;
     private LocationManager locationManager;
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
